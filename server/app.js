@@ -1,6 +1,5 @@
 var path = require('path');
 var express = require('express');
-var FlashCardModel = require('./models/flash-card-model');
 
 var app = express(); // Create an express app!
 module.exports = app; // Export it so it can be require('')'d
@@ -25,25 +24,4 @@ app.use(express.static(publicPath));
 // If we're hitting our home page, serve up our index.html file!
 app.get('/', function (req, res) {
     res.sendFile(indexHtmlPath);
-});
-
-app.use(function (req, res, next) {
-	console.log('made it')
-	next();
-});
-
-app.get('/cards', function (req, res) {
-
-    var modelParams = {};
-
-    if (req.query.category) {
-    	modelParams.category = req.query.category;
-    }
-
-    FlashCardModel.find(modelParams, function (err, cards) {
-        setTimeout(function () {
-            res.send(cards);
-        }, Math.random() * 1000);
-    });
-
 });
