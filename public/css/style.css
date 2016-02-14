@@ -24,6 +24,10 @@
     font-size: 40px;
     text-align: center;
     margin-bottom: 40px; }
+  .flash-card h3 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px; }
   .flash-card .flash-card-answers {
     width: 100%;
     margin: 0 auto;
@@ -36,7 +40,7 @@
     .flash-card .flash-card-answers:after {
       clear: both; }
   .flash-card .flash-card-answer {
-    min-height: 100px;
+    min-height: 70px;
     text-align: center;
     border: 1px solid black;
     padding: 20px;
