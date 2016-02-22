@@ -1,5 +1,6 @@
 var path = require('path');
 var express = require('express');
+var bodyParser = require('body-parser');
 var FlashCardModel = require('./models/flash-card-model');
 
 var app = express(); // Create an express app!
@@ -21,6 +22,8 @@ var indexHtmlPath = path.join(__dirname, '../index.html');
 // something in our public folder, serve up that file
 // e.g. angular.js, style.css
 app.use(express.static(publicPath));
+
+app.use(bodyParser.json());
 
 // If we're hitting our home page, serve up our index.html file!
 app.get('/', function (req, res) {
@@ -46,4 +49,27 @@ app.get('/cards', function (req, res) {
         }, Math.random() * 1000);
     });
 
+});
+
+app.post('/cards', function (req, res) {
+    var newCard = {
+        question: req.body.question,
+        category: req.body.category,
+        answers: req.body.answers
+    }
+    mongoose.model('FlashCard')
+      .create(newCard)
+      .then(function (flashcard) {
+        res.status(201).json(flashcard);
+      })
+      .then(null, next);
+})
+
+app.post('/', function (req, res, next) {
+  mongoose.model('Playlist')
+  .create(req.body)
+  .then(function (playlist) {
+    res.status(201).json(playlist);
+  })
+  .then(null, next);
 });

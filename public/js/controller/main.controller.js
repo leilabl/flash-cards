@@ -1,4 +1,4 @@
-app.controller('MainController', function ($scope, $http, FlashCardsFactory, ScoreFactory) {
+app.controller('MainController', function ($scope, $rootScope, $http, FlashCardsFactory, ScoreFactory) {
 	
 	FlashCardsFactory.getFlashCards()
 	.then(function (cards) {
@@ -13,7 +13,7 @@ app.controller('MainController', function ($scope, $http, FlashCardsFactory, Sco
 		});
 	}
 
-	$scope.categories = [
+	$rootScope.categories = [
 	    'MongoDB',
 	    'Express',
 	    'Angular',
